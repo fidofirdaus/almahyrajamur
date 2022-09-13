@@ -26,6 +26,7 @@ class PanenController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request->all());
         $tgl_sekarang = Carbon::now()->setTimezone('Asia/Jakarta')->format('Y-m-d');
         $panen_exist = Panen::where([
             ['tanggal', '=', $tgl_sekarang],

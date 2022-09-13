@@ -39,6 +39,14 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/hargaJual', 'PenjualanController@hargaJual')->name('penjualan.harga');
     Route::get('/penjualan/editStatus/{id}', 'PenjualanController@editStatus')->name('penjualan.editStatus');
     Route::post('/penjualan/updateStatus/{id}', 'PenjualanController@updateStatus')->name('penjualan.updateStatus');
+    
+    Route::get('/pengeluaranHarian', 'PengeluaranController@indexHarian')->name('pengeluaran.indexHarian');
+    Route::get('/pengeluaranKeseluruhan', 'PengeluaranController@indexKeseluruhan')->name('pengeluaran.indexKeseluruhan');
+    Route::get('/pengeluaran/create', 'PengeluaranController@create')->name('pengeluaran.create');
+    Route::post('/pengeluaran/create', 'PengeluaranController@store')->name('pengeluaran.store');
+    Route::get('/pengeluaran/createNew', 'PengeluaranController@createNew')->name('pengeluaran.createNew');
+    Route::get('/pengeluaran/edit/{id}', 'PengeluaranController@edit')->name('pengeluaran.edit');
+    Route::patch('/pengeluaran/edit/{id}', 'PengeluaranController@update')->name('pengeluaran.update');
 
     Route::resource('petani', PetaniController::class);
     Route::resource('pembeli', PembeliController::class);

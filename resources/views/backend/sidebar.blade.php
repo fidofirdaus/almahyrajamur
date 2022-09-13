@@ -47,6 +47,12 @@
                         <li><a href="{{ URL('/penjualanKeseluruhan') }}">Data Keseluruhan</a></li>
                     </ul>
                 </li>
+                <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="fa fa-dollar"></i><span class="hide-menu">Data Pengeluaran</span></a>
+                    <ul aria-expanded="false" class="collapse">
+                        <li><a href="{{ URL('/pengeluaranHarian') }}">Data Harian</a></li>
+                        <li><a href="{{ URL('/pengeluaranKeseluruhan') }}">Data Keseluruhan</a></li>
+                    </ul>
+                </li>
                 <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="fa fa-book"></i><span class="hide-menu">Laporan</span></a>
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="{{ URL('/') }}">Penjualan Petani</a></li>
