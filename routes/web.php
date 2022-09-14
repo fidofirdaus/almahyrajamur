@@ -47,6 +47,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/pengeluaran/createNew', 'PengeluaranController@createNew')->name('pengeluaran.createNew');
     Route::get('/pengeluaran/edit/{id}', 'PengeluaranController@edit')->name('pengeluaran.edit');
     Route::patch('/pengeluaran/edit/{id}', 'PengeluaranController@update')->name('pengeluaran.update');
+    
+    Route::get('/laporanPembelian', 'LaporanPembelianController@index')->name('laporan.index');
+    Route::post('/laporanPembelian', 'LaporanPembelianController@printPembelian')->name('laporan.printPembelian');
 
     Route::resource('petani', PetaniController::class);
     Route::resource('pembeli', PembeliController::class);

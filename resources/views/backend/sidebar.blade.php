@@ -55,7 +55,7 @@
                 </li>
                 <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="fa fa-book"></i><span class="hide-menu">Laporan</span></a>
                     <ul aria-expanded="false" class="collapse">
-                        <li><a href="{{ URL('/') }}">Penjualan Petani</a></li>
+                        <li><a href="{{ URL('/laporanPembelian') }}">Pembelian/Kulak </a></li>
                         <li><a href="index2.html">Penjualan Keseluruhan</a></li>
                         <li><a href="index2.html">Laporan Keuntungan</a></li>
                     </ul>

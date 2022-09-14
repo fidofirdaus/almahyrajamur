@@ -104,7 +104,7 @@
                                     <td>{{ Carbon\Carbon::parse($panen->tanggal)->translatedFormat("l, d F Y") }}</td>
                                     <td>{{ $panen->berat }} Kg</td>
                                     @if ($panen->hasil_penjualan != 0)
-                                    <td>Rp {{ number_format($panen->hasil_penjualan,2,',','.') }}</td>
+                                    <td>Rp {{ number_format($panen->hasil_penjualan,0,',','.') }}</td>
                                     @else
                                     <td>Belum Ada Penjualan</td>
                                     @endif
