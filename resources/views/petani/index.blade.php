@@ -49,10 +49,10 @@
                             <thead>
                                 <tr>
                                     <th style="width: 5%">No.</th>
-                                    <th style="width: 20%">Nama Petani</th>
-                                    <th style="width: 15%">Lokasi</th>
-                                    {{-- <th style="width: 15%">Username</th> --}}
-                                    <th style="width: 10%">Aksi</th>
+                                    <th style="width: 25%">Nama Petani</th>
+                                    <th style="width: 25%">Lokasi</th>
+                                    <th style="width: 25%">No. HP</th>
+                                    <th style="width: 20%">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -61,8 +61,8 @@
                                     <td>{{ $no+1 }}</td>
                                     <td>{{ $petani->name }}</td>
                                     <td>{{ $petani->lokasi }}</td>
-                                    {{-- <td>{{ $petani->username }}</td> --}}
-                                    <td><a href="{{ route('petani.edit', $petani->id) }}" class="btn btn-warning">Edit</a></td>
+                                    <td>{{ $petani->no_hp }}</td>
+                                    <td><a href="{{ route('petani.edit', $petani->id) }}" class="btn btn-warning"><i class="fa fa-pencil"></i> Edit</a></td>
                                 </tr>
                                 @endforeach
                             </tbody>

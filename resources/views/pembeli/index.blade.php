@@ -49,9 +49,10 @@
                             <thead>
                                 <tr>
                                     <th style="width: 5%">No.</th>
-                                    <th style="width: 30%">Nama Pembeli</th>
-                                    <th style="width: 25%">Asal</th>
-                                    <th style="width: 25%">Jenis</th>
+                                    <th style="width: 20%">Nama Pembeli</th>
+                                    <th style="width: 20%">Asal</th>
+                                    <th style="width: 20%">Jenis</th>
+                                    <th style="width: 20%">No. HP</th>
                                     <th style="width: 15%">Aksi</th>
                                 </tr>
                             </thead>
@@ -62,6 +63,7 @@
                                     <td>{{ $pembeli->name }}</td>
                                     <td>{{ $pembeli->lokasi }}</td>
                                     <td>{{ $pembeli->role }}</td>
+                                    <td>{{ $pembeli->no_hp }}</td>
                                     <td><a href="{{ route('pembeli.edit', $pembeli->id) }}" class="btn btn-warning">Edit</a></td>
                                 </tr>
                                 @endforeach

@@ -41,13 +41,18 @@
                                     <div class="form-group">
                                         <label class="control-label">Lokasi</label>
                                         <input type="text" value="{{ $petani->lokasi }}" name="lokasi" class="form-control @error('lokasi') is-invalid @enderror">
-                                        {{-- <select name="dusun" class="form-control @error('dusun') is-invalid @enderror" style="width: 100%">
-                                            <option value="Kampungbaru" {{ $petani->dusun == 'Kampungbaru' ? 'selected' : '' }}>Dusun Kampungbaru</option>
-                                            <option value="Perkebunan" {{ $petani->dusun == 'Perkebunan' ? 'selected' : '' }}>Dusun Perkebunan</option>
-                                            <option value="Ramiyan" {{ $petani->dusun == 'Ramiyan' ? 'selected' : '' }}>Dusun Ramiyan</option>
-                                            <option value="Sumbermulyo" {{ $petani->dusun == 'Sumbermulyo' ? 'selected' : '' }}>Dusun Sumbermulyo</option>
-                                        </select> --}}
                                         @error('lokasi')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Nomor HP</label>
+                                        <input type="number" value="{{ $petani->no_hp }}" name="no_hp" class="form-control @error('no_hp') is-invalid @enderror">
+                                        @error('no_hp')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>

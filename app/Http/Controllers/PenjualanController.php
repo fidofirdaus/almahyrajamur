@@ -119,6 +119,6 @@ class PenjualanController extends Controller
             $penjualan->status = 'Sudah Bayar';
             $penjualan->update();
         }
-        return redirect()->route('penjualan.indexHarian')->with('success', 'Status penjualan berhasil diubah');
+        return redirect()->route('penjualan.indexKeseluruhan')->with('success', 'Status penjualan berhasil diubah');
     }
 }

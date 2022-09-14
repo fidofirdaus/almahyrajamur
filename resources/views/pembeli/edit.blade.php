@@ -48,6 +48,32 @@
                                         @enderror
                                     </div>
                                 </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Nomor HP</label>
+                                        <input type="number" value="{{ $pembeli->no_hp }}" name="no_hp" class="form-control @error('no_hp') is-invalid @enderror">
+                                        @error('no_hp')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Jenis</label>
+                                        <select name="role" class="form-control @error('role') is-invalid @enderror" style="width: 100%">
+                                            <option disabled selected>Pilih Salah Satu</option>
+                                            <option {{ $pembeli->role == 'Langganan' ? 'selected' : '' }} value="Langganan">Langganan</option>
+                                            <option {{ $pembeli->role == 'Umum' ? 'selected' : '' }} value="Umum">Umum</option>
+                                        </select>
+                                        @error('role')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="form-actions">

@@ -40,15 +40,21 @@ class PembeliController extends Controller
             [
                 'name' => ['required', 'string', 'max:255'],
                 'lokasi' => ['required', 'string', 'max:255'],
+                'no_hp' => ['required', 'regex:/^(08)[0-9]*/', 'string', 'max:13', 'min:10'],
             ],
             [
                 'name.required' => 'Data tidak boleh kosong, harap diisi',
                 'lokasi.required' => 'Data tidak boleh kosong, harap diisi',
+                'no_hp.required' => 'Data tidak boleh kosong, harap diisi',
+                'no_hp.regex' => 'Nomor HP harus diawali dengan 08',
+                'no_hp.min' => 'Nomor HP minimal 10 digit',
+                'no_hp.max' => 'Nomor HP maksimal 13 digit',
             ]
         );
         User::create([
             'name' => $request->name,
             'lokasi' => $request->lokasi,
+            'no_hp' => $request->no_hp,
             'username' => null,
             'password' => null,
             'role' => $request->role
@@ -93,14 +99,21 @@ class PembeliController extends Controller
             [
                 'name' => ['required', 'string', 'max:255'],
                 'lokasi' => ['required', 'string', 'max:255'],
+                'no_hp' => ['required', 'regex:/^(08)[0-9]*/', 'string', 'max:13', 'min:10'],
             ],
             [
                 'name.required' => 'Data tidak boleh kosong, harap diisi',
+                'lokasi.required' => 'Data tidak boleh kosong, harap diisi',
+                'no_hp.required' => 'Data tidak boleh kosong, harap diisi',
+                'no_hp.regex' => 'Nomor HP harus diawali dengan 08',
+                'no_hp.min' => 'Nomor HP minimal 10 digit',
+                'no_hp.max' => 'Nomor HP maksimal 13 digit',
             ]
         );
         User::where('id', $id)->update([
             'name' => $request->name,
             'lokasi' => $request->lokasi,
+            'no_hp' => $request->no_hp,
         ]);
         return redirect()->route('pembeli.index')->with('success', 'Data pembeli berhasil diedit');
     }
