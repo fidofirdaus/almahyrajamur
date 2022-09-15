@@ -47,8 +47,6 @@
                                         @enderror
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row p-t-20">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label">Username</label>
@@ -65,6 +63,28 @@
                                         <label class="control-label">Nomor HP</label>
                                         <input type="number" value="08" name="no_hp" class="form-control @error('no_hp') is-invalid @enderror">
                                         @error('no_hp')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Jumlah Log</label>
+                                        <input type="number" min="1" name="jml_log" class="form-control @error('jml_log') is-invalid @enderror">
+                                        @error('jml_log')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Harga Log</label>
+                                        <input type="number" min="1000" name="harga_log" class="form-control @error('harga_log') is-invalid @enderror">
+                                        @error('harga_log')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>

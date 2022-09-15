@@ -42,12 +42,16 @@ class PetaniController extends Controller
                 'name' => ['required', 'string', 'max:255'],
                 'username' => ['required', 'string', 'max:255', 'unique:users'],
                 'lokasi' => ['required', 'string', 'max:255'],
+                'jml_log' => ['required'],
+                'harga_log' => ['required'],
                 'no_hp' => ['required', 'regex:/^(08)[0-9]*/', 'string', 'max:13', 'min:10'],
             ],
             [
                 'name.required' => 'Data tidak boleh kosong, harap diisi',
                 'lokasi.required' => 'Data tidak boleh kosong, harap diisi',
                 'username.required' => 'Data tidak boleh kosong, harap diisi',
+                'jml_log.required' => 'Data tidak boleh kosong, harap diisi',
+                'harga_log.required' => 'Data tidak boleh kosong, harap diisi',
                 'username.unique' => 'Data Username tersebut sudah ada, silakan ganti',
                 'no_hp.required' => 'Data tidak boleh kosong, harap diisi',
                 'no_hp.regex' => 'Nomor HP harus diawali dengan 08',
@@ -60,6 +64,8 @@ class PetaniController extends Controller
             'lokasi' => $request->lokasi,
             'username' => $request->username,
             'no_hp' => $request->no_hp,
+            'jml_log' => $request->jml_log,
+            'harga_log' => $request->harga_log,
             'password' => Hash::make(12345678),
             'role' => 'Petani'
         ]);
@@ -104,6 +110,8 @@ class PetaniController extends Controller
                 'name' => ['required', 'string', 'max:255'],
                 'lokasi' => ['required', 'string', 'max:255'],
                 'no_hp' => ['required', 'regex:/^(08)[0-9]*/', 'max:13', 'min:10'],
+                'jml_log' => ['required'],
+                'harga_log' => ['required'],
             ],
             [
                 'name.required' => 'Data tidak boleh kosong, harap diisi',
@@ -112,12 +120,16 @@ class PetaniController extends Controller
                 'no_hp.regex' => 'Nomor HP harus diawali dengan 08',
                 'no_hp.min' => 'Nomor HP minimal 10 digit',
                 'no_hp.max' => 'Nomor HP maksimal 13 digit',
+                'jml_log.required' => 'Data tidak boleh kosong, harap diisi',
+                'harga_log.required' => 'Data tidak boleh kosong, harap diisi',
             ]
         );
         User::where('id', $id)->update([
             'name' => $request->name,
             'lokasi' => $request->lokasi,
             'no_hp' => $request->no_hp,
+            'jml_log' => $request->jml_log,
+            'harga_log' => $request->harga_log,
         ]);
         return redirect()->route('petani.index')->with('success', 'Data petani berhasil diedit');
     }
