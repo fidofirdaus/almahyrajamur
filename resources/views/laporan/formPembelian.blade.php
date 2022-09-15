@@ -13,10 +13,10 @@
     <!-- ============================================================== -->
     <div class="row page-titles">
         <div class="col-md-5 col-8 align-self-center">
-            <h3 class="text-themecolor m-b-0 m-t-0">Laporan Penjualan Tiket</h3>
+            <h3 class="text-themecolor m-b-0 m-t-0">Laporan Pembelian ke Petani</h3>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ URL('/admin') }}">Home</a></li>
-                <li class="breadcrumb-item active">Laporan Penjualan Tiket</li>
+                <li class="breadcrumb-item active">Laporan Pembelian ke Petani</li>
             </ol>
         </div>
     </div>
@@ -36,7 +36,7 @@
                     </div>
                 </div>
                 @endif
-                <h4 class="card-title">Data Laporan Penjualan Tiket</h4>
+                <h4 class="card-title">Data Laporan Pembelian ke Petani</h4>
                 <form action="{{ route('laporan.printPembelian') }}" target="_blank" method="post">
                     @csrf
                     <div class="row">

@@ -11,11 +11,19 @@ use Illuminate\Support\Facades\Auth;
 
 class PanenController extends Controller
 {
-    public function index()
+    public function indexHarian()
     {
-        $dataPanen = Panen::join('users', 'id_petani', '=', 'users.id')->orderBy('created_at', 'desc')->get(['panens.*', 'users.name', 'users.lokasi']);
+        $tgl_sekarang = Carbon::now()->setTimezone('Asia/Jakarta')->format('Y-m-d');
+        $dataPanen = Panen::join('users', 'id_petani', '=', 'users.id')->where('status', null)->where('tanggal', $tgl_sekarang)->orderBy('created_at', 'desc')->get(['panens.*', 'users.name', 'users.lokasi']);
+        $dataPanen2 = Panen::where('id_petani', '=', Auth::user()->id)->where('tanggal', $tgl_sekarang)->orderBy('created_at', 'desc')->get();
+        return view('panen.indexHarian', compact('dataPanen', 'dataPanen2'));
+    }
+    
+    public function indexKeseluruhan()
+    {
+        $dataPanen = Panen::join('users', 'id_petani', '=', 'users.id')->where('status', null)->orderBy('created_at', 'desc')->get(['panens.*', 'users.name', 'users.lokasi']);
         $dataPanen2 = Panen::where('id_petani', '=', Auth::user()->id)->orderBy('created_at', 'desc')->get();
-        return view('panen.index', compact('dataPanen', 'dataPanen2'));
+        return view('panen.indexKeseluruhan', compact('dataPanen', 'dataPanen2'));
     }
 
     public function create()
@@ -41,13 +49,14 @@ class PanenController extends Controller
                 'berat' => $request->berat,
                 'hasil_penjualan' => $request->hasil_penjualan
             ]);
-            return redirect()->route('panen.index')->with('success', 'Data panen berhasil ditambah');
+            return redirect()->route('panen.indexHarian')->with('success', 'Data panen berhasil ditambah');
         }
     }
 
     public function edit($id)
     {
-        $detailPanen = Panen::where('id', '=', $id)->get();
+        $detailPanen = Panen::join('belis', 'panens.tanggal', 'belis.tanggal')->where('panens.id', '=', $id)->get(['belis.harga', 'panens.berat', 'panens.id']);
+        // dd($detailPanen);
         return view('panen.edit', compact('detailPanen'));
     }
     
@@ -55,17 +64,20 @@ class PanenController extends Controller
     {
         $request->validate(
             [
-                'berat' => ['required', 'integer'],
+                'berat' => ['required'],
+                'harga' => ['required', 'integer'],
             ],
             [
                 'berat.required' => 'Data tidak boleh kosong, harap diisi',
+                'harga.required' => 'Data tidak boleh kosong, harap diisi',
             ]
         );
 
         Panen::where('id', $id)->update([
             'berat' => $request->berat,
+            'hasil_penjualan' => $request->berat * $request->harga,
         ]);
-        return redirect()->route('panen.index')->with('success', 'Data panen berhasil diedit');
+        return redirect()->route('panen.indexHarian')->with('success', 'Data panen berhasil diedit');
     }
 
     public function createPembelian()
@@ -85,7 +97,7 @@ class PanenController extends Controller
             'tanggal' => $tanggal,
             'harga' => $request->harga
         ]);
-        return redirect()->route('panen.index')->with('success', 'Data harga pembelian/kulak berhasil ditambah');
+        return redirect()->route('panen.indexHarian')->with('success', 'Data harga pembelian/kulak berhasil ditambah');
     }
 
     public function hargaBeli()

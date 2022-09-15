@@ -10,7 +10,7 @@
             <h3 class="text-themecolor m-b-0 m-t-0">Data Panen</h3>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ URL('/admin') }}">Home</a></li>
-                <li class="breadcrumb-item active">Data Panen</li>
+                <li class="breadcrumb-item active">Data Panen Keseluruhan</li>
             </ol>
         </div>
     </div>
@@ -41,11 +41,7 @@
                     </div>
                 </div>
                 @endif
-                <h4 class="card-title">Data Panen</h4>
-                @if (Auth::user()->role == 'Pengepul')
-                <a href="{{ URL('/panen/create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Tambah Data Panen</a>
-                @endif
-                {{-- @elseif (Auth::user()->role == 'Pengepul' || Auth::user()->role == 'Kades') --}}
+                <h4 class="card-title">Data Panen Keseluruhan</h4>
                 @if (Auth::user()->role == 'Pengepul')
                 <div class="row">
                     <div class="table-responsive m-t-20">
@@ -71,11 +67,11 @@
                                     <td>{{ $panen->name }}</td>
                                     <td>{{ $panen->lokasi }}</td>
                                     <td>{{ $panen->berat }} Kg</td>
-                                    @if ($panen->hasil_penjualan == 0 && Auth::user()->role == 'Pengepul')
+                                    @if ($panen->hasil_penjualan == 0)
                                     <td><a href="{{ URL('/panen/jual') }}" class="btn btn-warning"><i class="fa fa-dollar"></i>Masukkan Harga</a></td>
-                                    <td><a href="{{ route('panen.edit', $panen->id) }}" class="btn btn-danger"><i class="fa fa-pencil"></i> Edit</a></td>
-                                    @elseif ($panen->hasil_penjualan != 0 && Auth::user()->role == 'Pengepul')
-                                    <td>Rp {{ number_format($panen->hasil_penjualan,2,',','.') }}</td>
+                                    <td><a href="{{ route('panen.detail', $panen->id) }}" class="btn btn-success"><i class="fa fa-info"></i> Detail</a></td>
+                                    @elseif ($panen->hasil_penjualan != 0)
+                                    <td>Rp {{ number_format($panen->hasil_penjualan,0,',','.') }}</td>
                                     <td><a href="{{ route('panen.detail', $panen->id) }}" class="btn btn-success"><i class="fa fa-info"></i> Detail</a></td>
                                     @endif
                                 </tr>

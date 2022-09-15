@@ -57,7 +57,7 @@ class PembeliController extends Controller
             'no_hp' => $request->no_hp,
             'username' => null,
             'password' => null,
-            'role' => $request->role
+            'role' => 'Pembeli'
         ]);
         return redirect()->route('pembeli.index')->with('success', 'Data pembeli berhasil ditambah');
     }

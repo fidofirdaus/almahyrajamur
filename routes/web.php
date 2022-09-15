@@ -17,7 +17,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/admin', 'HomeController@index')->name('admin.index');
     Route::get('/home', 'HomeController@index')->name('admin.index');
 
-    Route::get('/panen', 'PanenController@index')->name('panen.index');
+    Route::get('/panen', 'PanenController@indexHarian')->name('panen.indexHarian');
+    Route::get('/panenKeseluruhan', 'PanenController@indexKeseluruhan')->name('panen.indexKeseluruhan');
     Route::get('/panen/create', 'PanenController@create')->name('panen.create');
     Route::post('/panen/create', 'PanenController@store')->name('panen.store');
     Route::get('/panen/edit/{id}', 'PanenController@edit')->name('panen.edit');
@@ -37,7 +38,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::patch('/penjualan/editHarga/{id}', 'PenjualanController@updateHarga')->name('penjualan.updateHarga');
     Route::get('/penjualan/{id}', 'PenjualanController@detailPenjualan')->name('penjualan.detail');
     Route::get('/hargaJual', 'PenjualanController@hargaJual')->name('penjualan.harga');
-    Route::get('/penjualan/editStatus/{id}', 'PenjualanController@editStatus')->name('penjualan.editStatus');
+    Route::patch('/penjualan/editStatus/{id}', 'PenjualanController@editStatus')->name('penjualan.editStatus');
     Route::post('/penjualan/updateStatus/{id}', 'PenjualanController@updateStatus')->name('penjualan.updateStatus');
     
     Route::get('/pengeluaranHarian', 'PengeluaranController@indexHarian')->name('pengeluaran.indexHarian');

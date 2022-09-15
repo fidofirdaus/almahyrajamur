@@ -34,7 +34,7 @@
                                         <label class="control-label">Berat Jamur (Kg) 
                                             <small class="text-danger">Jika tidak bulat, pisahkan angka dengan (.) Contoh: 2.5</small>
                                          </label>
-                                         <input type="number" min="0.1" step=".01" name="berat" class="form-control @error('berat') is-invalid @enderror">
+                                         <input type="number" min="0.5" step=".5" name="berat" class="form-control @error('berat') is-invalid @enderror">
                                         @error('berat')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>

@@ -48,7 +48,7 @@ class PenjualanController extends Controller
                 'total_harga' => $request->total_harga,
                 'status' => 'Belum Bayar',
             ]);
-            return redirect()->route('penjualan.index')->with('success', 'Data penjualan berhasil ditambah');
+            return redirect()->route('penjualan.indexHarian')->with('success', 'Data penjualan berhasil ditambah');
         }
     }
 
@@ -69,7 +69,7 @@ class PenjualanController extends Controller
             'tanggal' => $tanggal,
             'harga' => $request->harga
         ]);
-        return redirect()->route('penjualan.index')->with('success', 'Data harga penjualan berhasil ditambah');
+        return redirect()->route('penjualan.indexKeseluruhan')->with('success', 'Data harga penjualan berhasil ditambah');
     }
 
     public function editHarga($id)
@@ -86,7 +86,7 @@ class PenjualanController extends Controller
             $penjualan->total_harga = $request->harga * $penjualan->berat;
             $penjualan->update();
         }
-        return redirect()->route('penjualan.index')->with('success', 'Data harga penjualan berhasil diubah');
+        return redirect()->route('penjualan.indexKeseluruhan')->with('success', 'Data harga penjualan berhasil diubah');
     }
 
     public function detailPenjualan($id)
@@ -101,13 +101,13 @@ class PenjualanController extends Controller
         return view('penjualan.harga', compact('dataHarga'));
     }
 
-    public function editStatus($id)
+    public function editStatus(Request $request, $id)
     {
-        $dataPenjualan = Penjualan::where('penjualans.id', $id)->first();
-        
-        return view('penjualan.editStatus', [
-            'dataPenjualan' => $dataPenjualan
+        $dataPenjualan = Penjualan::where('penjualans.id', $id)->update([
+            'status' => $request->status
         ]);
+        
+        return redirect()->route('penjualan.indexKeseluruhan')->with('success', 'Status penjualan berhasil diubah');
     }
 
     public function updateStatus(Request $request, $id)

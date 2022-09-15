@@ -38,10 +38,13 @@
                     <a href="{{ URL('/admin') }}" aria-expanded="false"><i class="fa fa-home"></i><span class="hide-menu">Dashboard</span></a>
                 </li>
                 @if (Auth::user()->role == 'Pengepul')
-                <li>
-                    <a href="{{ URL('/panen') }}" aria-expanded="false"><i class="fa fa-bar-chart-o"></i><span class="hide-menu">Data Panen</span></a>
+                <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="fa fa-bar-chart-o"></i><span class="hide-menu">Data Panen</span></a>
+                    <ul aria-expanded="false" class="collapse">
+                        <li><a href="{{ URL('/panen') }}">Data Harian</a></li>
+                        <li><a href="{{ URL('/panenKeseluruhan') }}">Data Keseluruhan</a></li>
+                    </ul>
                 </li>
-                <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="fa fa-dollar"></i><span class="hide-menu">Data Penjualan</span></a>
+                <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="fa fa-money"></i><span class="hide-menu">Data Penjualan</span></a>
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="{{ URL('/penjualanHarian') }}">Data Harian</a></li>
                         <li><a href="{{ URL('/penjualanKeseluruhan') }}">Data Keseluruhan</a></li>
@@ -56,8 +59,8 @@
                 <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="fa fa-book"></i><span class="hide-menu">Laporan</span></a>
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="{{ URL('/laporanPembelian') }}">Pembelian/Kulak </a></li>
-                        <li><a href="index2.html">Penjualan Keseluruhan</a></li>
-                        <li><a href="index2.html">Laporan Keuntungan</a></li>
+                        {{-- <li><a href="index2.html">Penjualan Keseluruhan</a></li>
+                        <li><a href="index2.html">Laporan Keuntungan</a></li> --}}
                     </ul>
                 </li>
                 <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="fa fa-user"></i><span class="hide-menu">Data Pengguna</span></a>

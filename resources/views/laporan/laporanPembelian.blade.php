@@ -126,7 +126,7 @@
                 min-height: 50px;
             }
             #invoice-POS #mid {
-                min-height: 80px;
+                min-height: 40px;
             }
             #invoice-POS #bot {
                 min-height: 50px;
@@ -161,7 +161,6 @@
             }
             #invoice-POS .tabletitle {
                 font-size: .5em;
-                background: #EEE;
             }
             #invoice-POS .service {
                 border-bottom: 1px solid #EEE;
@@ -174,9 +173,6 @@
             }
             #invoice-POS .itemtext {
                 font-size: .5em;
-            }
-            #invoice-POS #legalcopy {
-                margin-top: 5mm;
             }
         </style>
     
@@ -204,11 +200,9 @@
         
             <div id="mid">
             <div class="info">
-                <p><b>Info Petani</b></p>
                 <p> 
-                    Nama     : {{ $petani->name }}</br>
-                    Nomor HP : {{ $petani->no_hp }}</br>
-                    Lokasi   : {{ $petani->lokasi }}</br>
+                    Petani   : {{ $petani->name }}</br>
+                    Lokasi   : {{ $petani->lokasi }}
                 </p>
             </div>
             </div><!--End Invoice Mid-->
@@ -217,16 +211,16 @@
                 <div id="table">
                     <table>
                         <tr class="tabletitle">
-                            <td class="item"><h2>Tanggal</h2></td>
-                            <td class="Hours"><h2>Qty</h2></td>
-                            <td class="Rate"><h2>Harga (/Kg)</h2></td>
-                            <td class="Rate"><h2>Harga Total</h2></td>
+                            <td class="item"><p style="font-size: 9px">Tgl</p></td>
+                            <td class="Hours"><p style="font-size: 9px">Kg</p></td>
+                            <td class="Rate"><p style="font-size: 9px">Harga</p></td>
+                            <td class="Rate"><p style="font-size: 9px">Jumlah</p></td>
                         </tr>
 
                         @foreach ($dataPanen as $panen)
                         <tr class="service">
-                            <td class="tableitem"><p class="itemtext">{{ Carbon\Carbon::parse($panen->tanggal)->translatedFormat("d F Y") }}</p></td>
-                            <td class="tableitem"><p class="itemtext">{{ $panen->berat }} Kg</p></td>
+                            <td class="tableitem"><p class="itemtext">{{ Carbon\Carbon::parse($panen->tanggal)->translatedFormat("d/m/Y") }}</p></td>
+                            <td class="tableitem"><p class="itemtext">{{ $panen->berat }}</p></td>
                             <td class="tableitem"><p class="itemtext">Rp {{ number_format($panen->hasil_penjualan/$panen->berat,0,',','.') }}</p></td>
                             <td class="tableitem"><p class="itemtext">Rp {{ number_format($panen->hasil_penjualan,0,',','.') }}</p></td>
                         </tr>
@@ -235,16 +229,16 @@
                         <tr class="tabletitle">
                             <td></td>
                             <td></td>
-                            <td class="Rate"><h2>Total</h2></td>
-                            <td class="payment"><h2>Rp {{ number_format($total,0,',','.') }}</h2></td>
+                            <td class="Rate"><p style="font-size: 9px">Total</p></td>
+                            <td class="payment"><p style="font-size: 9px">Rp {{ number_format($total,0,',','.') }}</p></td>
                         </tr>
 
                     </table>
                 </div><!--End Table-->
 
                 <div id="legalcopy">
-                    <p class="legal">
-                        {{-- <strong>Almahyra Jamur</strong> --}}
+                    <p style="font-size: 8px" class="legal">
+                        <i>*Bukti pembayaran yang sah</i>
                     </p>
                 </div>
             </div><!--End InvoiceBot-->

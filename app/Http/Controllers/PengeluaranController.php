@@ -35,17 +35,25 @@ class PengeluaranController extends Controller
         $tanggal = Carbon::now()->setTimezone('Asia/Jakarta')->format('Y-m-d');
 
         for ($i=0; $i < count($nama); $i++) { 
-            $data = [
-                'nama' => $nama[$i],
-                'tanggal' => $tanggal,
-                'jumlah' => $jumlah[$i],
-                'created_at' => Carbon::now()->setTimezone('Asia/Jakarta'),
-                'updated_at' => Carbon::now()->setTimezone('Asia/Jakarta'),
-            ];
-            Pengeluaran::insert($data);
+            $pengeluaran_exist = Pengeluaran::where([
+                ['tanggal', '=', $tanggal],
+                ['nama', '=', $nama[$i]]
+            ])->get();
+            if (count($pengeluaran_exist) > 0) {
+                return redirect()->route('pengeluaran.indexHarian')->with('warning', 'Data pengeluaran sudah ada, silakan tambah data penjualan yang lain.');
+            } else {
+                $data = [
+                    'nama' => $nama[$i],
+                    'tanggal' => $tanggal,
+                    'jumlah' => $jumlah[$i],
+                    'created_at' => Carbon::now()->setTimezone('Asia/Jakarta'),
+                    'updated_at' => Carbon::now()->setTimezone('Asia/Jakarta'),
+                ];
+                Pengeluaran::insert($data);
+            }
         }
-
         return redirect()->route('pengeluaran.indexHarian')->with('success', 'Data pengeluaran berhasil ditambah');
+
     }
 
     public function createNew()

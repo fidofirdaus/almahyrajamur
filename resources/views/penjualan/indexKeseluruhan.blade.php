@@ -42,7 +42,6 @@
                 </div>
                 @endif
                 <h4 class="card-title">Data Penjualan</h4>
-                @if (Auth::user()->role == 'Pengepul')
                 <div class="row">
                     <div class="table-responsive m-t-20">
                         <table id="myTable" class="table table-bordered table-striped">
@@ -62,40 +61,49 @@
                             <tbody>
                                 @foreach ($dataPenjualan as $no => $penjualan)
                                 <tr>
+                                    @if ($penjualan->status == null)
+                                    <td class="text-danger">{{ $no+1 }}</td>
+                                    <td class="text-danger">{{ Carbon\Carbon::parse($penjualan->tanggal)->translatedFormat("l, d F Y") }}</td>
+                                    <td class="text-danger">{{ $penjualan->name }}</td>
+                                    <td class="text-danger">{{ $penjualan->berat }} Kg</td>
+                                    <td><b><p class="text-danger">Belum Bayar</p></b></td>
+                                    @else
                                     <td>{{ $no+1 }}</td>
                                     <td>{{ Carbon\Carbon::parse($penjualan->tanggal)->translatedFormat("l, d F Y") }}</td>
-                                    <td>{{ $penjualan->name }} ({{ $penjualan->role }})</td>
+                                    <td>{{ $penjualan->name }}</td>
                                     <td>{{ $penjualan->berat }} Kg</td>
-                                    @if ($penjualan->status == null)
-                                    <td><p class="text-danger">Belum Bayar</p></td>
-                                    @else
-                                    <td><p class="text-success">{{ $penjualan->status }}</p></td>
+                                    <td><b><p class="text-success">{{ $penjualan->status }}</p></b></td>
                                     @endif
 
-                                    @if ($penjualan->total_harga == 0 && Auth::user()->role == 'Pengepul')
+                                    @if ($penjualan->total_harga == 0)
                                     <td><a href="{{ URL('/penjualan/createHarga') }}" class="btn btn-warning"><i class="fa fa-dollar"></i>Masukkan Harga</a></td>
                                     <td><a href="{{ route('penjualan.detail', $penjualan->id) }}" class="btn btn-success"><i class="fa fa-info"></i> Detail</a>
                                     </td>
 
-                                    @elseif($penjualan->total_harga != 0 && $penjualan->role == 'Umum')
-                                    <td>Rp {{ number_format($penjualan->total_harga,0,',','.') }} 
-                                        @if ($penjualan->status == null)
+                                    @elseif($penjualan->total_harga != 0 && $penjualan->status == null)
+                                    <td>Rp {{ number_format($penjualan->total_harga,0,',','.') }}
                                         <a href="{{ route('penjualan.editHarga', $penjualan->id) }}" class="btn btn-primary">
                                         <i class="fa fa-pencil"></i></a>
-                                        @endif
                                     </td> 
                                     <td class="text-center"><a href="{{ route('penjualan.detail', $penjualan->id) }}" class="btn btn-success"><i class="fa fa-info"></i> Detail</a>
-                                        @if ($penjualan->status == null)
-                                        <a href="{{ route('penjualan.editStatus', $penjualan->id) }}" class="btn btn-warning"><i class="fa fa-check"></i> Ganti Status</a>
-                                        @endif
+                                    {{-- <a href="{{ route('penjualan.editStatus', $penjualan->id) }}" class="btn btn-warning"><i class="fa fa-check"></i> Ganti Status</a> --}}
+                                    <a class="btn btn-warning" href="{{ route('penjualan.editStatus', $penjualan->id) }}"
+                                        onclick="event.preventDefault();
+                                            window.confirm('Apakah anda yakin ingin mengubah status?');
+                                            document.getElementById('verifikasi-form').submit();">
+                                        <i class="fa fa-check"></i> Ganti Status
+                                    </a>
+                            
+                                    <form id="verifikasi-form" action="{{ route('penjualan.editStatus', $penjualan->id) }}" method="POST" class="d-none">
+                                        @csrf
+                                        @method('PATCH')
+                                        <input type="hidden" name="status" value="Sudah Bayar">
+                                    </form>
                                     </td>
 
-                                    @elseif ($penjualan->total_harga != 0 && $penjualan->role == 'Langganan')
+                                    @elseif ($penjualan->total_harga != 0 && $penjualan->status != null)
                                     <td>Rp {{ number_format($penjualan->total_harga,0,',','.') }}</td>
                                     <td class="text-center"><a href="{{ route('penjualan.detail', $penjualan->id) }}" class="btn btn-success"><i class="fa fa-info"></i> Detail</a>
-                                        @if ($penjualan->status == null)
-                                        <a href="{{ route('penjualan.editStatus', $penjualan->id) }}" class="btn btn-warning"><i class="fa fa-check"></i> Ganti Status</a>
-                                        @endif
                                     </td>
                                     @endif
                                 </tr>
@@ -104,38 +112,6 @@
                         </table>
                     </div>
                 </div>
-                @elseif(Auth::user()->role == 'Petani')
-                <div class="row">
-                    <div class="table-responsive m-t-20">
-                        <table id="myTable" class="table table-bordered table-striped">
-                            <thead>
-                                <tr>
-                                    <th style="width: 5%">No.</th>
-                                    <th style="width: 35%">Tanggal</th>
-                                    <th style="width: 20%">Berat</th>
-                                    <th style="width: 30`%">Hasil Penjualan</th>
-                                    <th style="width: 10%">Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($dataPenjualan2 as $no => $penjualan)
-                                <tr>
-                                    <td>{{ $no+1 }}</td>
-                                    <td>{{ Carbon\Carbon::parse($penjualan->tanggal)->translatedFormat("l, d F Y") }}</td>
-                                    <td>{{ $penjualan->berat }} Kg</td>
-                                    @if ($penjualan->hasil_penjualan != 0)
-                                    <td>Rp {{ number_format($penjualan->hasil_penjualan,2,',','.') }}</td>
-                                    @else
-                                    <td>Belum Ada Penjualan</td>
-                                    @endif
-                                    <td><a href="{{ route('penjualan.detail', $penjualan->id) }}" class="btn btn-success">Detail</a></td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                @endif
             </div>
         </div>
     </div>

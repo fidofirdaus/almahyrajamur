@@ -29,8 +29,19 @@
                             <div class="row p-t-20">
                                 <div class="col-md-6">
                                     <div class="form-group">
+                                        <label class="control-label">Harga Jamur (Kilogram)</label>
+                                        <input type="number" value="{{ $panen->harga }}" name="harga" class="form-control @error('harga') is-invalid @enderror">
+                                        @error('harga')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
                                         <label class="control-label">Berat Jamur (Kilogram)</label>
-                                        <input type="number" value="{{ $panen->berat }}" name="berat" class="form-control @error('berat') is-invalid @enderror">
+                                        <input type="number" step=".5" value="{{ $panen->berat }}" name="berat" class="form-control @error('berat') is-invalid @enderror">
                                         @error('berat')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>

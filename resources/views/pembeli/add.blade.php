@@ -58,16 +58,6 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="" class="control-label">Jenis Pembeli</label>
-                                        <select name="role" class="form-control @error('role') is-invalid @enderror" style="width: 100%">
-                                            <option disabled selected>Pilih Salah Satu</option>
-                                            <option value="Langganan">Langganan</option>
-                                            <option value="Umum">Umum</option>
-                                        </select>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                         <div class="form-actions">
