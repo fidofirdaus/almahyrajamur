@@ -75,13 +75,30 @@
                                     <td><a href="{{ URL('/panen/jual') }}" class="btn btn-warning"><i class="fa fa-dollar"></i>Masukkan Harga</a></td>
                                     <td><a href="{{ route('panen.detail', $panen->id) }}" class="btn btn-success"><i class="fa fa-info"></i> Detail</a></td>
                                     @elseif ($panen->hasil_penjualan != 0)
-                                    <td>Rp {{ number_format($panen->hasil_penjualan,0,',','.') }} <a href="{{ route('panen.edit', $panen->id) }}" class="btn btn-danger"><i class="fa fa-pencil"></i> Edit</a></td>
+                                    <td>Rp {{ number_format($panen->hasil_penjualan,0,',','.') }} 
+                                        @if ($panen->status == null)
+                                        <a href="{{ route('panen.edit', $panen->id) }}" class="btn btn-danger"><i class="fa fa-pencil"></i> Edit</a>
+                                        @endif
+                                    </td>
                                     <td><a href="{{ route('panen.detail', $panen->id) }}" class="btn btn-success"><i class="fa fa-info"></i> Detail</a></td>
                                     @endif
                                 </tr>
                                 @endforeach
                             </tbody>
                         </table>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex flex-row">
+                                    <div class="round round-lg align-self-center round-warning"><i class="fa fa-bar-chart-o"></i></div>
+                                    <div class="m-l-10 align-self-center">
+                                        <h2 class="m-b-0">{{ $beratPanen }} Kg</h2><h3>Rp {{ number_format($uangPanen,0,',','.') }}</h3>
+                                        <h5 class="text-muted m-b-0">Panen Hari Ini</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 @elseif(Auth::user()->role == 'Petani')

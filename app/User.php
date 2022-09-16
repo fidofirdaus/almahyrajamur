@@ -39,6 +39,6 @@ class User extends Authenticatable
 
     public function panens()
     {
-        return $this->belongsTo('Panen', 'id_petani');
+        return $this->hasMany(Panen::class, 'id_petani');
     }
 }

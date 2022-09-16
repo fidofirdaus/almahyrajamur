@@ -42,12 +42,15 @@
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="{{ URL('/panen') }}">Data Harian</a></li>
                         <li><a href="{{ URL('/panenKeseluruhan') }}">Data Keseluruhan</a></li>
+                        <li><a href="{{ URL('/panenSortir') }}">Data Sortir</a></li>
+                        <li><a href="{{ URL('/panenBayar') }}">Data Sudah Dibayar</a></li>
                     </ul>
                 </li>
                 <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="fa fa-money"></i><span class="hide-menu">Data Penjualan</span></a>
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="{{ URL('/penjualanHarian') }}">Data Harian</a></li>
                         <li><a href="{{ URL('/penjualanKeseluruhan') }}">Data Keseluruhan</a></li>
+                        <li><a href="{{ URL('/penjualanSortir') }}">Data Sortir</a></li>
                     </ul>
                 </li>
                 <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="fa fa-dollar"></i><span class="hide-menu">Data Pengeluaran</span></a>

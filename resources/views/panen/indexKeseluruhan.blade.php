@@ -71,7 +71,11 @@
                                     <td><a href="{{ URL('/panen/jual') }}" class="btn btn-warning"><i class="fa fa-dollar"></i>Masukkan Harga</a></td>
                                     <td><a href="{{ route('panen.detail', $panen->id) }}" class="btn btn-success"><i class="fa fa-info"></i> Detail</a></td>
                                     @elseif ($panen->hasil_penjualan != 0)
-                                    <td>Rp {{ number_format($panen->hasil_penjualan,0,',','.') }}</td>
+                                    <td>Rp {{ number_format($panen->hasil_penjualan,0,',','.') }}
+                                    @if ($panen->status == null)
+                                    <a href="{{ route('panen.edit', $panen->id) }}" class="btn btn-danger"><i class="fa fa-pencil"></i> Edit</a>
+                                    @endif
+                                    </td>
                                     <td><a href="{{ route('panen.detail', $panen->id) }}" class="btn btn-success"><i class="fa fa-info"></i> Detail</a></td>
                                     @endif
                                 </tr>

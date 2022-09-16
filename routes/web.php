@@ -19,6 +19,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/panen', 'PanenController@indexHarian')->name('panen.indexHarian');
     Route::get('/panenKeseluruhan', 'PanenController@indexKeseluruhan')->name('panen.indexKeseluruhan');
+    Route::get('/panenBayar', 'PanenController@indexBayar')->name('panen.indexBayar');
     Route::get('/panen/create', 'PanenController@create')->name('panen.create');
     Route::post('/panen/create', 'PanenController@store')->name('panen.store');
     Route::get('/panen/edit/{id}', 'PanenController@edit')->name('panen.edit');
