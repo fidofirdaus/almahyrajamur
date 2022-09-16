@@ -61,7 +61,11 @@
                                     <td>{{ $no+1 }}</td>
                                     <td>{{ $petani->name }}</td>
                                     <td>{{ $petani->lokasi }}</td>
+                                    @if ($petani->jml_log == null)
+                                    <td>Belum ada data Log</td>
+                                    @else
                                     <td>{{ $petani->jml_log }} Buah</td>
+                                    @endif
                                     <td><a href="{{ route('petani.edit', $petani->id) }}" class="btn btn-warning"><i class="fa fa-pencil"></i> Edit</a></td>
                                 </tr>
                                 @endforeach

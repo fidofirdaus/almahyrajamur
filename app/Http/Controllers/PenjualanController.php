@@ -92,6 +92,7 @@ class PenjualanController extends Controller
     public function detailPenjualan($id)
     {
         $dataPenjualan = Penjualan::join('users', 'id_pembeli', '=', 'users.id')->where('penjualans.id', $id)->get(['penjualans.*', 'users.name', 'users.lokasi', 'users.role']);
+        // dd($dataPenjualan);
         return view('penjualan.detail', compact('dataPenjualan'));
     }
 
@@ -103,9 +104,9 @@ class PenjualanController extends Controller
 
     public function editStatus(Request $request, $id)
     {
-        $dataPenjualan = Penjualan::where('penjualans.id', $id)->update([
-            'status' => $request->status
-        ]);
+        $dataPenjualan = Penjualan::where('penjualans.id', $id)->where('id_pembeli', $request->id_pembeli)->first();
+        $dataPenjualan->status = $request->status;
+        $dataPenjualan->update();
         
         return redirect()->route('penjualan.indexKeseluruhan')->with('success', 'Status penjualan berhasil diubah');
     }

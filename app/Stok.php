@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Stok extends Model
 {
-    protected $fillable = ['stok_awal', 'stok_sisa'];
+    protected $fillable = ['tanggal', 'stok_awal', 'stok_sisa'];
 }

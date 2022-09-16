@@ -1,80 +1,3 @@
-{{-- <html>
-    <head>
-    <title>Faktur Pembayaran</title>
-    <style>
-    
-    #tabel
-    {
-    font-size:15px;
-    border-collapse:collapse;
-    }
-    #tabel  td
-    {
-    padding-left:5px;
-    border: 1px solid black;
-    }
-    </style>
-    </head>
-    <body style='font-family:tahoma; font-size:8pt;' onload="window.print()">
-    <center><table style='width:350px; font-size:16pt; font-family:calibri; border-collapse: collapse;' border = '0'>
-    <td width='70%' align='CENTER' vertical-align:top'><span style='color:black;'>
-    <b>APOTEK GEMILANG FARMA</b></br>JL XXXXXXXXXXX XXXXXXX</span></br>
-    
-    
-    <span style='font-size:12pt'>No. : xxxxx, 11 Juni 2020 (user:xxxxx), 11:57:50</span></br>
-    </td>
-    </table>
-    <style>
-    hr { 
-        display: block;
-        margin-top: 0.5em;
-        margin-bottom: 0.5em;
-        margin-left: auto;
-        margin-right: auto;
-        border-style: inset;
-        border-width: 1px;
-    } 
-    </style>
-    <table cellspacing='0' cellpadding='0' style='width:350px; font-size:12pt; font-family:calibri;  border-collapse: collapse;' border='0'>
-    
-    <tr align='center'>
-    <td width='10%'>Item</td>
-    <td width='13%'>Price</td>
-    <td width='4%'>Qty</td>
-    <td width='7%'>Diskon %</td>
-    <td width='13%'>Total</td><tr>
-    <td colspan='5'><hr></td></tr>
-    </tr>
-    <tr><td style='vertical-align:top'>3 WAY STOPCOCK</td>
-    <td style='vertical-align:top; text-align:right; padding-right:10px'>7.440</td>
-    <td style='vertical-align:top; text-align:right; padding-right:10px'>100</td>
-    <td style='vertical-align:top; text-align:right; padding-right:10px'>0,00%</td>
-    <td style='text-align:right; vertical-align:top'>744.000</td></tr>
-    <tr>
-    <td colspan='5'><hr></td>
-    </tr>
-    <tr>
-    <td colspan = '4'><div style='text-align:right'>Biaya Adm : </div></td><td style='text-align:right; font-size:16pt;'>Rp3.500,00</td>
-    </tr>
-    <tr>
-    <td colspan = '4'><div style='text-align:right; color:black'>Total : </div></td><td style='text-align:right; font-size:16pt; color:black'>747.500</td>
-    </tr>
-    <tr>
-    <td colspan = '4'><div style='text-align:right; color:black'>Cash : </div></td><td style='text-align:right; font-size:16pt; color:black'>1.000.000</td>
-    </tr>
-    <tr>
-    <td colspan = '4'><div style='text-align:right; color:black'>Change : </div></td><td style='text-align:right; font-size:16pt; color:black'>252.500</td>
-    </tr>
-    <tr>
-    <td colspan = '4'><div style='text-align:right; color:black'>DP : </div></td><td style='text-align:right; font-size:16pt; color:black'>0</td>
-    </tr>
-    <tr>
-    <td colspan = '4'><div style='text-align:right; color:black'>Sisa : </div></td><td style='text-align:right; font-size:16pt; color:black'>0</td>
-    </tr>
-    </table>
-    <table style='width:350; font-size:12pt;' cellspacing='2'><tr></br><td align='center'>****** TERIMAKASIH ******</br></td></tr></table></center></body>
-</html> --}}
-
 <!DOCTYPE html>
 <html lang="en" >
  
@@ -126,7 +49,7 @@
                 min-height: 50px;
             }
             #invoice-POS #mid {
-                min-height: 20px;
+                min-height: 40px;
             }
             #invoice-POS #bot {
                 min-height: 50px;
@@ -188,6 +111,62 @@
     </head>
  
     <body translate="no" onload="window.print()">
+        <div id="invoice-POS">
+        
+            <center id="top">
+            {{-- <div class="logo"></div> --}}
+            <div class="info"> 
+                <h2>Almahyra Jamur</h2>
+                <p>Glenmore</p>
+            </div><!--End Info-->
+            </center><!--End InvoiceTop-->
+        
+            <div id="mid">
+            <div class="info">
+                <p style="font-size: 9px"> 
+                    Petani   : {{ $petani->name }}</br>
+                    Lokasi   : {{ $petani->lokasi }}
+                </p>
+            </div>
+            </div><!--End Invoice Mid-->
+        
+            <div id="bot">
+                <div id="table">
+                    <table>
+                        <tr class="tabletitle">
+                            <td class="item"><p style="font-size: 9px">Tgl</p></td>
+                            <td class="Hours"><p style="font-size: 9px">Kg</p></td>
+                            <td class="Rate"><p style="font-size: 9px">Harga</p></td>
+                            <td class="Rate"><p style="font-size: 9px">Jumlah</p></td>
+                        </tr>
+
+                        @foreach ($dataPanen as $panen)
+                        <tr class="service">
+                            <td class="tableitem"><p class="itemtext">{{ Carbon\Carbon::parse($panen->tanggal)->translatedFormat("d/m/Y") }}</p></td>
+                            <td class="tableitem"><p class="itemtext">{{ $panen->berat }}</p></td>
+                            <td class="tableitem"><p class="itemtext">Rp {{ number_format($panen->hasil_penjualan/$panen->berat,0,',','.') }}</p></td>
+                            <td class="tableitem"><p class="itemtext">Rp {{ number_format($panen->hasil_penjualan,0,',','.') }}</p></td>
+                        </tr>
+                        @endforeach
+
+                        <tr class="tabletitle">
+                            <td></td>
+                            <td></td>
+                            <td class="Rate"><p style="font-size: 9px">Total</p></td>
+                            <td class="payment"><p style="font-size: 9px">Rp {{ number_format($total,0,',','.') }}</p></td>
+                        </tr>
+
+                    </table>
+                </div><!--End Table-->
+
+                <div id="legalcopy">
+                    <p style="font-size: 6px" class="legal">
+                        <i>*Bukti pembayaran yang sah</i><br>
+                        <i>Tanggal Cetak: {{ Carbon\Carbon::now()->setTimeZone('Asia/Jakarta')->format('d F Y') }} Jam {{ Carbon\Carbon::now()->setTimeZone('Asia/Jakarta')->format('H:i') }}</i>
+                    </p>
+                </div>
+            </div><!--End InvoiceBot-->
+        </div><!--End Invoice-->
         <div id="invoice-POS">
         
             <center id="top">

@@ -75,6 +75,11 @@
                         <li><a href="{{ URL('/hargaJual') }}">Harga Jual</a></li>
                     </ul>
                 </li>
+                <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="fa fa-file"></i><span class="hide-menu">Data Rekap</span></a>
+                    <ul aria-expanded="false" class="collapse">
+                        <li><a href="{{ URL('/indexRekapPanen') }}">Rekap Panen Petani</a></li>
+                    </ul>
+                </li>
                 @else
                 <li>
                     <a href="{{ URL('/panen') }}" aria-expanded="false"><i class="fa fa-bar-chart-o"></i><span class="hide-menu">Data Panen</span></a>

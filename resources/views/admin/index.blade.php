@@ -4,10 +4,10 @@
 <div class="container-fluid">
     <div class="row page-titles">
         <div class="col-md-5 col-8 align-self-center">
-            <h3 class="text-themecolor m-b-0 m-t-0">{{ Auth::user()->role }} Dashboard</h3>
+            <h3 class="text-themecolor m-b-0 m-t-0">Dashboard</h3>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ URL('/') }}">Home</a></li>
-                <li class="breadcrumb-item active">{{ Auth::user()->role }} Dashboard</li>
+                <li class="breadcrumb-item"><a href="{{ URL('/admin') }}">Dashboard</a></li>
+                {{-- <li class="breadcrumb-item active">Dashboard</li> --}}
             </ol>
         </div>
     </div>
@@ -15,11 +15,38 @@
         <div class="card-body">
             <div class="alert alert-success alert-dismissible show fade">
                 <div class="alert-body">
-                    @if (Auth::user()->role == 'Kades')
-                    Halo, Bapak Kepala Desa !
-                    @else
-                    Selamat Datang, Bapak {{ Auth::user()->name }} !
-                    @endif
+                    <button class="close" data-dismiss="alert">
+                        <span>&times;</span>
+                    </button>
+                    Selamat Datang, Saudara/i {{ Auth::user()->name }} !
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex flex-row">
+                        <div class="round round-lg align-self-center round-warning"><i class="fa fa-bar-chart-o"></i></div>
+                        <div class="m-l-10 align-self-center">
+                            <a href="{{ route('panen.indexHarian') }}"><h2 class="m-b-0">{{ $panen }} Kg</h2><h3>Rp {{ number_format($uangPanen,0,',','.') }}</h3></a>
+                            <h5 class="text-muted m-b-0">Panen Hari Ini</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex flex-row">
+                        <div class="round round-lg align-self-center round-info"><i class="fa fa-dollar"></i></div>
+                        <div class="m-l-10 align-self-center">
+                            <a href="{{ route('penjualan.indexHarian') }}"><h2 class="m-b-0">{{ $penjualan }} Kg</h2><h3 class="m-b-0">Rp {{ number_format($uangPenjualan,0,',','.') }}</h3><h4 class="m-y-0 text-danger">Rp {{ number_format($uangPenjualanBelum,0,',','.') }}</h4></a>
+                            <h5 class="text-muted m-b-0">Penjualan Hari Ini</h5>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

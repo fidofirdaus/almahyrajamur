@@ -38,8 +38,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::patch('/penjualan/editHarga/{id}', 'PenjualanController@updateHarga')->name('penjualan.updateHarga');
     Route::get('/penjualan/{id}', 'PenjualanController@detailPenjualan')->name('penjualan.detail');
     Route::get('/hargaJual', 'PenjualanController@hargaJual')->name('penjualan.harga');
-    Route::patch('/penjualan/editStatus/{id}', 'PenjualanController@editStatus')->name('penjualan.editStatus');
-    Route::post('/penjualan/updateStatus/{id}', 'PenjualanController@updateStatus')->name('penjualan.updateStatus');
+    Route::patch('/penjualan/editStatus/{$id}', 'PenjualanController@editStatus')->name('penjualan.editStatus');
+    // Route::post('/penjualan/updateStatus/{id}', 'PenjualanController@updateStatus')->name('penjualan.updateStatus');
     
     Route::get('/pengeluaranHarian', 'PengeluaranController@indexHarian')->name('pengeluaran.indexHarian');
     Route::get('/pengeluaranKeseluruhan', 'PengeluaranController@indexKeseluruhan')->name('pengeluaran.indexKeseluruhan');
@@ -51,6 +51,9 @@ Route::group(['middleware' => ['auth']], function () {
     
     Route::get('/laporanPembelian', 'LaporanPembelianController@index')->name('laporan.index');
     Route::post('/laporanPembelian', 'LaporanPembelianController@printPembelian')->name('laporan.printPembelian');
+    
+    Route::get('/indexRekapPanen', 'RekapController@indexRekapPanen')->name('rekap.indexRekapPanen');
+    Route::post('/indexRekapPanen', 'RekapController@lihatRekapPanen')->name('rekap.lihatRekapPanen');
 
     Route::resource('petani', PetaniController::class);
     Route::resource('pembeli', PembeliController::class);

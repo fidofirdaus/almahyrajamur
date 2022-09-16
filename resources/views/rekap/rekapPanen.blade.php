@@ -90,7 +90,7 @@
                 box-shadow: 0 0 1in -0.25in rgba(0, 0, 0, 0.5);
                 padding: 2mm;
                 margin: 0 auto;
-                width: 54mm;
+                width: 100mm;
                 background: #FFF;
             }
             #invoice-POS ::selection {
@@ -126,7 +126,7 @@
                 min-height: 50px;
             }
             #invoice-POS #mid {
-                min-height: 20px;
+                min-height: 40px;
             }
             #invoice-POS #bot {
                 min-height: 50px;
@@ -165,12 +165,12 @@
             #invoice-POS .service {
                 border-bottom: 1px solid #EEE;
             }
-            #invoice-POS .item {
+            /* #invoice-POS .item {
                 width: 21mm;
             }
             #invoice-POS .Hours {
                 width: 8mm;
-            }
+            } */
             #invoice-POS .itemtext {
                 font-size: .5em;
             }
@@ -187,7 +187,7 @@
         </script>
     </head>
  
-    <body translate="no" onload="window.print()">
+    <body translate="no">
         <div id="invoice-POS">
         
             <center id="top">
@@ -200,9 +200,10 @@
         
             <div id="mid">
             <div class="info">
-                <p style="font-size: 9px"> 
-                    Petani   : {{ $petani->name }}</br>
-                    Lokasi   : {{ $petani->lokasi }}
+                <p> 
+                    Petani   : {{ $petani->name }}<br>
+                    Lokasi   : {{ $petani->lokasi }}<br>
+                    Periode : {{ Carbon\Carbon::parse($tglAwal)->translatedFormat("d F Y") }} - {{ Carbon\Carbon::parse($tglAkhir)->translatedFormat("d F Y") }}
                 </p>
             </div>
             </div><!--End Invoice Mid-->
@@ -227,21 +228,20 @@
                         @endforeach
 
                         <tr class="tabletitle">
-                            <td></td>
-                            <td></td>
                             <td class="Rate"><p style="font-size: 9px">Total</p></td>
+                            <td class="Rate"><p style="font-size: 9px">{{ $berat }} Kg</p></td>
+                            <td></td>
                             <td class="payment"><p style="font-size: 9px">Rp {{ number_format($total,0,',','.') }}</p></td>
                         </tr>
 
                     </table>
                 </div><!--End Table-->
 
-                <div id="legalcopy">
-                    <p style="font-size: 6px" class="legal">
-                        <i>*Bukti pembayaran yang sah</i><br>
-                        <i>Tanggal Cetak: {{ Carbon\Carbon::now()->setTimeZone('Asia/Jakarta')->format('d F Y') }} Jam {{ Carbon\Carbon::now()->setTimeZone('Asia/Jakarta')->format('H:i') }}</i>
+                {{-- <div id="legalcopy">
+                    <p style="font-size: 8px" class="legal">
+                        <i>*Bukti pembayaran yang sah</i>
                     </p>
-                </div>
+                </div> --}}
             </div><!--End InvoiceBot-->
         </div><!--End Invoice-->
 
