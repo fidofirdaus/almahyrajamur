@@ -12,19 +12,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="card-body">
-            <div class="alert alert-success alert-dismissible show fade">
-                <div class="alert-body">
-                    <button class="close" data-dismiss="alert">
-                        <span>&times;</span>
-                    </button>
-                    Selamat Datang, Saudara/i {{ Auth::user()->name }} !
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-4 col-md-6">
+        <div class="col-lg-6 col-md-6">
             <div class="card">
                 <div class="card-body">
                     <div class="d-flex flex-row">
@@ -37,7 +25,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-4 col-md-6">
+        <div class="col-lg-6 col-md-6">
             <div class="card">
                 <div class="card-body">
                     <div class="d-flex flex-row">
@@ -45,6 +33,36 @@
                         <div class="m-l-10 align-self-center">
                             <a href="{{ route('penjualan.indexHarian') }}"><h2 class="m-b-0">{{ $penjualan }} Kg</h2><h3 class="m-b-0">Rp {{ number_format($uangPenjualan,0,',','.') }}</h3><h4 class="m-y-0 text-danger">Rp {{ number_format($uangPenjualanBelum,0,',','.') }}</h4></a>
                             <h5 class="text-muted m-b-0">Penjualan Hari Ini</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex flex-row">
+                        <div class="round round-lg align-self-center round-danger"><i class="fa fa-bar-chart-o"></i></div>
+                        <div class="m-l-10 align-self-center">
+                            <a href="{{ route('panen.indexHarian') }}"><h2 class="m-b-0">{{ $panenKemarin }} Kg</h2><h3>Rp {{ number_format($uangPanenKemarin,0,',','.') }}</h3></a>
+                            <h5 class="text-muted m-b-0">Panen Kemarin</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex flex-row">
+                        <div class="round round-lg align-self-center round-primary"><i class="fa fa-dollar"></i></div>
+                        <div class="m-l-10 align-self-center">
+                            <a href="{{ route('penjualan.indexKeseluruhan') }}"><h2 class="m-b-0">{{ $penjualanKemarin }} Kg</h2><h3 class="m-b-0">Rp {{ number_format($uangPenjualanKemarin,0,',','.') }}</h3>
+                                <h4 class="m-y-0 text-danger">Rp {{ number_format($uangPenjualanBelumKemarin,0,',','.') }}</h4>
+                            </a>
+                            <h5 class="text-muted m-b-0">Penjualan Kemarin</h5>
                         </div>
                     </div>
                 </div>

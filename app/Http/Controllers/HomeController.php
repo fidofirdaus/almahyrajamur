@@ -31,6 +31,13 @@ class HomeController extends Controller
         $penjualan = Penjualan::where('tanggal', Carbon::now()->setTimezone('Asia/Jakarta')->format('Y-m-d'))->sum('berat');
         $uangPenjualan = Penjualan::where('tanggal', Carbon::now()->setTimezone('Asia/Jakarta')->format('Y-m-d'))->where('status', 'Sudah Bayar')->sum('total_harga');
         $uangPenjualanBelum = Penjualan::where('tanggal', Carbon::now()->setTimezone('Asia/Jakarta')->format('Y-m-d'))->where('status', 'Belum Bayar')->sum('total_harga');
-        return view('admin.index', ['panen' => $panen, 'penjualan' => $penjualan, 'uangPenjualan' => $uangPenjualan, 'uangPenjualanBelum' => $uangPenjualanBelum, 'uangPanen' => $uangPanen]);
+
+        $panenKemarin = Panen::where('tanggal', Carbon::yesterday()->setTimezone('Asia/Jakarta')->format('Y-m-d'))->sum('berat');
+        $uangPanenKemarin = Panen::where('tanggal', Carbon::yesterday()->setTimezone('Asia/Jakarta')->format('Y-m-d'))->sum('hasil_penjualan');
+        $penjualanKemarin = Penjualan::where('tanggal', Carbon::yesterday()->setTimezone('Asia/Jakarta')->format('Y-m-d'))->sum('berat');
+        $uangPenjualanKemarin = Penjualan::where('tanggal', Carbon::yesterday()->setTimezone('Asia/Jakarta')->format('Y-m-d'))->where('status', 'Sudah Bayar')->sum('total_harga');
+        $uangPenjualanBelumKemarin = Penjualan::where('tanggal', Carbon::yesterday()->setTimezone('Asia/Jakarta')->format('Y-m-d'))->where('status', 'Belum Bayar')->sum('total_harga');
+
+        return view('admin.index', ['panen' => $panen, 'panenKemarin' => $panenKemarin, 'uangPanen' => $uangPanen, 'uangPanenKemarin' => $uangPanenKemarin, 'penjualan' => $penjualan, 'uangPenjualan' => $uangPenjualan, 'penjualanKemarin' => $penjualanKemarin, 'uangPenjualanKemarin' => $uangPenjualanKemarin, 'uangPenjualanBelum' => $uangPenjualanBelum, 'uangPenjualanBelumKemarin' => $uangPenjualanBelumKemarin]);
     }
 }
