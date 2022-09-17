@@ -52,8 +52,8 @@
                                     <th style="width: 20%">Nama Pembeli</th>
                                     <th style="width: 10%">Berat</th>
                                     @if (Auth::user()->role == 'Pengepul')
-                                    <th style="width: 10%">Status</th>
-                                    <th style="width: 20%">Total Harga</th>
+                                    <th style="width: 15%">Status</th>
+                                    <th style="width: 15%">Total Harga</th>
                                     <th style="width: 15%">Aksi</th>
                                     @endif
                                 </tr>
@@ -82,7 +82,8 @@
                                         <i class="fa fa-pencil"></i></a>
                                     </td>
                                     <td><a href="{{ route('penjualan.detail', $penjualan->id) }}" class="btn btn-success"><i class="fa fa-info"></i> Detail</a>
-                                    <a class="btn btn-warning" href="{{ route('penjualan.editStatus', $penjualan->id) }}"
+                                    <a href="{{ route('penjualan.editStatus', $penjualan->id) }}" class="btn btn-warning"><i class="fa fa-check"></i> Ganti Status</a>
+                                    {{-- <a class="btn btn-warning" href="{{ route('penjualan.editStatus', $penjualan->id) }}"
                                         onclick="event.preventDefault();
                                             if (confirm('Apakah anda yakin ingin mengubah status?')) document.getElementById('verifikasi-form').submit(); return false">
                                         <i class="fa fa-check"></i> Ganti Status
@@ -93,7 +94,7 @@
                                         @method('PATCH')
                                         <input type="hidden" name="status" value="Sudah Bayar">
                                         <input type="hidden" name="id" value="{{ $penjualan->id }}">
-                                    </form>
+                                    </form> --}}
                                     </td>
 
                                     @elseif($penjualan->total_harga != 0 && $penjualan->status == 'Sudah Bayar')

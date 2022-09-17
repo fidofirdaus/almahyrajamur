@@ -10,6 +10,6 @@ class Penjualan extends Model
 
     public function pembeli()
     {
-        return $this->belongsTo('User', 'id_pembeli', 'id');
+        return $this->belongsTo(User::class, 'id_pembeli', 'id');
     }
 }

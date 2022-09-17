@@ -61,7 +61,7 @@ class PanenController extends Controller
 
     public function edit($id)
     {
-        $detailPanen = Panen::join('belis', 'panens.tanggal', 'belis.tanggal')->where('panens.id', '=', $id)->get(['belis.harga', 'panens.berat', 'panens.id']);
+        $detailPanen = Panen::where('id', '=', $id)->get(['panens.*']);
         // dd($detailPanen);
         return view('panen.edit', compact('detailPanen'));
     }

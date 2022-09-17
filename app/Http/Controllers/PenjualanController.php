@@ -104,11 +104,18 @@ class PenjualanController extends Controller
 
     public function editStatus(Request $request, $id)
     {
-        $dataPenjualan = Penjualan::where('penjualans.id', $id)->where('id_pembeli', $request->id_pembeli)->first();
-        $dataPenjualan->status = $request->status;
-        $dataPenjualan->update();
+        // $dataPenjualan = Penjualan::where('penjualans.id', $id)->get();
+        // foreach ($dataPenjualan as $penjualan)
+        // {
+        //     $penjualan->status = 'Sudah Bayar';
+        //     $penjualan->update();
+        // }
         
-        return redirect()->route('penjualan.indexKeseluruhan')->with('success', 'Status penjualan berhasil diubah');
+        // return redirect()->route('penjualan.indexKeseluruhan')->with('success', 'Status penjualan berhasil diubah');
+        $dataPenjualan = Penjualan::where('penjualans.id', $id)->first();
+        return view('penjualan.editStatus', [
+            'dataPenjualan' => $dataPenjualan
+        ]);
     }
 
     public function updateStatus(Request $request, $id)

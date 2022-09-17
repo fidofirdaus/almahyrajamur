@@ -39,8 +39,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::patch('/penjualan/editHarga/{id}', 'PenjualanController@updateHarga')->name('penjualan.updateHarga');
     Route::get('/penjualan/{id}', 'PenjualanController@detailPenjualan')->name('penjualan.detail');
     Route::get('/hargaJual', 'PenjualanController@hargaJual')->name('penjualan.harga');
-    Route::patch('/penjualan/editStatus/{$id}', 'PenjualanController@editStatus')->name('penjualan.editStatus');
-    // Route::post('/penjualan/updateStatus/{id}', 'PenjualanController@updateStatus')->name('penjualan.updateStatus');
+    Route::get('/penjualan/editStatus/{id}', 'PenjualanController@editStatus')->name('penjualan.editStatus');
+    Route::post('/penjualan/editStatus/{id}', 'PenjualanController@updateStatus')->name('penjualan.updateStatus');
+    // Route::get('/penjualan/verifBayar/{id}', 'PenjualanController@hargaJual')->name('penjualan.harga');
     
     Route::get('/pengeluaranHarian', 'PengeluaranController@indexHarian')->name('pengeluaran.indexHarian');
     Route::get('/pengeluaranKeseluruhan', 'PengeluaranController@indexKeseluruhan')->name('pengeluaran.indexKeseluruhan');
@@ -49,6 +50,22 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/pengeluaran/createNew', 'PengeluaranController@createNew')->name('pengeluaran.createNew');
     Route::get('/pengeluaran/edit/{id}', 'PengeluaranController@edit')->name('pengeluaran.edit');
     Route::patch('/pengeluaran/edit/{id}', 'PengeluaranController@update')->name('pengeluaran.update');
+    
+    Route::get('/panenSortir', 'PanenSortirController@index')->name('panenSortir.index');
+    Route::get('/panenSortir/create', 'PanenSortirController@create')->name('panenSortir.create');
+    Route::post('/panenSortir/create', 'PanenSortirController@store')->name('panenSortir.store');
+    Route::get('/panenSortir/detail/{id}', 'PanenSortirController@detail')->name('panenSortir.detail');
+    Route::get('/panenSortir/harga/{id}', 'PanenSortirController@editHarga')->name('panenSortir.editHarga');
+    Route::post('/panenSortir/harga/{id}', 'PanenSortirController@updateHarga')->name('panenSortir.updateHarga');
+    
+    Route::get('/penjualanSortir', 'PenjualanSortirController@index')->name('penjualanSortir.index');
+    Route::get('/penjualanSortir/create', 'PenjualanSortirController@create')->name('penjualanSortir.create');
+    Route::post('/penjualanSortir/create', 'PenjualanSortirController@store')->name('penjualanSortir.store');
+    Route::get('/penjualanSortir/detail/{id}', 'PenjualanSortirController@detail')->name('penjualanSortir.detail');
+    Route::get('/penjualanSortir/harga/{id}', 'PenjualanSortirController@editHarga')->name('penjualanSortir.editHarga');
+    Route::post('/penjualanSortir/harga/{id}', 'PenjualanSortirController@updateHarga')->name('penjualanSortir.updateHarga');
+    Route::get('/penjualanSortir/editStatus/{id}', 'PenjualanSortirController@editStatus')->name('penjualanSortir.editStatus');
+    Route::post('/penjualanSortir/editStatus/{id}', 'PenjualanSortirController@updateStatus')->name('penjualanSortir.updateStatus');
     
     Route::get('/laporanPembelian', 'LaporanPembelianController@index')->name('laporan.index');
     Route::post('/laporanPembelian', 'LaporanPembelianController@printPembelian')->name('laporan.printPembelian');

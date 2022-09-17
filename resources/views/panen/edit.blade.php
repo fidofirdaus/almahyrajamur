@@ -30,7 +30,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="control-label">Harga Jamur (Kilogram)</label>
-                                        <input type="number" value="{{ $panen->harga }}" name="harga" class="form-control @error('harga') is-invalid @enderror">
+                                        <input type="number" value="{{ $panen->hasil_penjualan/$panen->berat }}" name="harga" class="form-control @error('harga') is-invalid @enderror">
                                         @error('harga')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -49,11 +49,12 @@
                                         @enderror
                                     </div>
                                 </div>
-                            </div>
+                            </div> 
                         </div>
                         <div class="form-actions">
                             <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i> Simpan</button>
-                            <a href="{{ url('/panen') }}" class="btn btn-inverse">Kembali</a>
+                            <a href="{{ url('/panen') }}" class="btn btn-inverse">Kembali ke Panen Harian</a>
+                            <a href="{{ url('/panenKeseluruhan') }}" class="btn btn-inverse">Kembali ke Panen Keseluruhan</a>
                         </div>
                     </form>
                     @endforeach

@@ -41,4 +41,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Panen::class, 'id_petani');
     }
+    
+    public function penjualans()
+    {
+        return $this->hasMany(Penjualan::class, 'id_pembeli');
+    }
+    
+    public function sortirs()
+    {
+        return $this->hasMany(Sortirpanen::class, 'id_petani');
+    }
 }
