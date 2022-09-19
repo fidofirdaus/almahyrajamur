@@ -200,8 +200,12 @@
         
             <div id="mid">
             <div class="info">
-                <p style="font-size: 9px"> 
+                <p style="font-size: 9px">
+                    @if (Request::segment(1) == 'laporanPembelian')
                     Petani   : {{ $petani->name }}</br>
+                    @else
+                    Petani   : {{ $petani->name }} (Data Sortir)</br>
+                    @endif 
                     Lokasi   : {{ $petani->lokasi }}
                 </p>
             </div>
@@ -220,9 +224,15 @@
                         @foreach ($dataPanen as $panen)
                         <tr class="service">
                             <td class="tableitem"><p class="itemtext">{{ Carbon\Carbon::parse($panen->tanggal)->translatedFormat("d/m/Y") }}</p></td>
+                            @if (Request::segment(1) == 'laporanPembelian')
                             <td class="tableitem"><p class="itemtext">{{ $panen->berat }}</p></td>
                             <td class="tableitem"><p class="itemtext">Rp {{ number_format($panen->hasil_penjualan/$panen->berat,0,',','.') }}</p></td>
                             <td class="tableitem"><p class="itemtext">Rp {{ number_format($panen->hasil_penjualan,0,',','.') }}</p></td>
+                            @else
+                            <td class="tableitem"><p class="itemtext">{{ $panen->berat }}</p></td>
+                            <td class="tableitem"><p class="itemtext">Rp {{ number_format($panen->total_harga/$panen->berat,0,',','.') }}</p></td>
+                            <td class="tableitem"><p class="itemtext">Rp {{ number_format($panen->total_harga,0,',','.') }}</p></td>
+                            @endif
                         </tr>
                         @endforeach
 
@@ -237,7 +247,7 @@
                 </div><!--End Table-->
 
                 <div id="legalcopy">
-                    <p style="font-size: 6px" class="legal">
+                    <p style="font-size: 7px" class="legal">
                         <i>*Bukti pembayaran yang sah</i><br>
                         <i>Tanggal Cetak: {{ Carbon\Carbon::now()->setTimeZone('Asia/Jakarta')->format('d F Y') }} Jam {{ Carbon\Carbon::now()->setTimeZone('Asia/Jakarta')->format('H:i') }}</i>
                     </p>

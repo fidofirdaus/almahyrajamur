@@ -69,6 +69,8 @@ Route::group(['middleware' => ['auth']], function () {
     
     Route::get('/laporanPembelian', 'LaporanPembelianController@index')->name('laporan.index');
     Route::post('/laporanPembelian', 'LaporanPembelianController@printPembelian')->name('laporan.printPembelian');
+    Route::get('/laporanPembelianSortir', 'LaporanPembelianController@indexSortir')->name('laporan.indexSortir');
+    Route::post('/laporanPembelianSortir', 'LaporanPembelianController@printPanenSortir')->name('laporan.printPanenSortir');
     
     Route::get('/indexRekapPanen', 'RekapController@indexRekapPanen')->name('rekap.indexRekapPanen');
     Route::post('/indexRekapPanen', 'RekapController@lihatRekapPanen')->name('rekap.lihatRekapPanen');
