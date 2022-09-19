@@ -50,6 +50,7 @@
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="{{ URL('/penjualanHarian') }}">Data Harian</a></li>
                         <li><a href="{{ URL('/penjualanKeseluruhan') }}">Data Keseluruhan</a></li>
+                        <li><a href="{{ URL('/penjualanBelum') }}">Data Belum Bayar</a></li>
                         <li><a href="{{ URL('/penjualanSortir') }}">Data Sortir</a></li>
                     </ul>
                 </li>

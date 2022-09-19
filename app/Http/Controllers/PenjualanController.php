@@ -25,6 +25,12 @@ class PenjualanController extends Controller
         return view('penjualan.indexHarian', compact('dataPenjualan'));
     }
 
+    public function indexBelum()
+    {
+        $dataPenjualan = Penjualan::where('status', 'Belum Bayar')->get();
+        return view('penjualan.indexBelum', compact('dataPenjualan'));
+    }
+
     public function create()
     {
         $dataPembeli = User::where('role', 'Langganan')->orWhere('role', 'Umum')->get();

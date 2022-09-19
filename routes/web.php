@@ -31,6 +31,7 @@ Route::group(['middleware' => ['auth']], function () {
     
     Route::get('/penjualanHarian', 'PenjualanController@indexHarian')->name('penjualan.indexHarian');
     Route::get('/penjualanKeseluruhan', 'PenjualanController@indexKeseluruhan')->name('penjualan.indexKeseluruhan');
+    Route::get('/penjualanBelum', 'PenjualanController@indexBelum')->name('penjualan.indexBelum');
     Route::get('/penjualan/create', 'PenjualanController@create')->name('penjualan.create');
     Route::post('/penjualan/create', 'PenjualanController@store')->name('penjualan.store');
     Route::get('/penjualan/createHarga', 'PenjualanController@createHarga')->name('penjualan.createHarga');
