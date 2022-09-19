@@ -75,6 +75,8 @@ Route::group(['middleware' => ['auth']], function () {
     
     Route::get('/indexRekapPanen', 'RekapController@indexRekapPanen')->name('rekap.indexRekapPanen');
     Route::post('/indexRekapPanen', 'RekapController@lihatRekapPanen')->name('rekap.lihatRekapPanen');
+    Route::get('/rekapKeuntungan', 'RekapController@rekapKeuntungan')->name('rekap.rekapKeuntungan');
+    Route::post('/rekapKeuntungan', 'RekapController@printRekapKeuntungan')->name('rekap.printRekapKeuntungan');
 
     Route::resource('petani', PetaniController::class);
     Route::resource('pembeli', PembeliController::class);

@@ -83,6 +83,7 @@
                 <li> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="fa fa-file"></i><span class="hide-menu">Data Rekap</span></a>
                     <ul aria-expanded="false" class="collapse">
                         <li><a href="{{ URL('/indexRekapPanen') }}">Rekap Panen Petani</a></li>
+                        <li><a href="{{ URL('/rekapKeuntungan') }}">Rekap Keuntungan</a></li>
                     </ul>
                 </li>
                 @else

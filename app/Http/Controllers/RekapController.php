@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Panen;
+use App\Penjualan;
+use App\Penjualansortir;
+use App\Sortirpanen;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -34,5 +37,40 @@ class RekapController extends Controller
                 dd('ini download');
                 break;
         }
+    }
+
+    public function rekapKeuntungan()
+    {
+        return view('rekap.formKeuntungan');
+    }
+
+    public function printRekapKeuntungan(Request $request)
+    {
+        //Penjualan
+        $dataPenjualan = Penjualan::where('status', 'Sudah Bayar')->whereBetween('tanggal', [$request->tglAwal, $request->tglAkhir])->get();
+        $dataPenjualanSortir = Penjualansortir::where('status', 'Sudah Bayar')->whereBetween('tanggal', [$request->tglAwal, $request->tglAkhir])->get();
+
+        $totalPenjualan = Penjualan::where('status', 'Sudah Bayar')->whereBetween('tanggal', [$request->tglAwal, $request->tglAkhir])->sum('total_harga');
+        $totalPenjualanSortir = Penjualansortir::where('status', 'Sudah Bayar')->whereBetween('tanggal', [$request->tglAwal, $request->tglAkhir])->sum('total_harga');
+
+        $beratPenjualan = Penjualan::where('status', 'Sudah Bayar')->whereBetween('tanggal', [$request->tglAwal, $request->tglAkhir])->sum('berat');
+        $beratPenjualanSortir = Penjualansortir::where('status', 'Sudah Bayar')->whereBetween('tanggal', [$request->tglAwal, $request->tglAkhir])->sum('berat_awal');
+
+
+        //Panen
+        $dataPanen = Panen::where('status', 'Sudah Dibayar')->whereBetween('tanggal', [$request->tglAwal, $request->tglAkhir])->get();
+        $dataPanenSortir = Sortirpanen::where('status', 'Sudah Dibayar')->whereBetween('tanggal', [$request->tglAwal, $request->tglAkhir])->get();
+
+        
+        $totalPanen = Panen::where('status', 'Sudah Dibayar')->whereBetween('tanggal', [$request->tglAwal, $request->tglAkhir])->sum('hasil_penjualan');
+        $totalPanenSortir = Sortirpanen::where('status', 'Sudah Dibayar')->whereBetween('tanggal', [$request->tglAwal, $request->tglAkhir])->sum('total_harga');
+
+        $beratPanen = Panen::where('status', 'Sudah Dibayar')->whereBetween('tanggal', [$request->tglAwal, $request->tglAkhir])->sum('berat');
+        $beratPanenSortir = Sortirpanen::where('status', 'Sudah Dibayar')->whereBetween('tanggal', [$request->tglAwal, $request->tglAkhir])->sum('berat');
+
+        //Data
+        $data = ['dataPenjualan' => $dataPenjualan, 'dataPenjualanSortir' => $dataPenjualanSortir, 'dataPanen' => $dataPanen, 'dataPanenSortir' => $dataPanenSortir, 'totalPenjualan' => $totalPenjualan, 'totalPenjualanSortir' => $totalPenjualanSortir, 'totalPanen' => $totalPanen, 'totalPanenSortir' => $totalPanenSortir, 'beratPenjualan' => $beratPenjualan, 'beratPenjualanSortir' => $beratPenjualanSortir, 'beratPanen' => $beratPanen, 'beratPanenSortir' => $beratPanenSortir, 'tglAwal' => $request->tglAwal, 'tglAkhir' => $request->tglAkhir];
+
+        return view('rekap.rekapKeuntungan', $data);
     }
 }
