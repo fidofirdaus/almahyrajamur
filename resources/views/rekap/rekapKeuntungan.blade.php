@@ -251,9 +251,40 @@
                     </table>
                 </div><!--End Table-->
 
+                {{-- Data Pengeluaran --}}
+                <div id="table">
+                    <table>
+                        <p>Data Pengeluaran</p>
+                        <tr class="tabletitle">
+                            <td class="item"><p style="font-size: 9px">Tgl</p></td>
+                            <td class="Hours"><p style="font-size: 9px">Nama</p></td>
+                            <td class="Rate"></td>
+                            <td class="Rate"><p style="font-size: 9px">Jumlah</p></td>
+                        </tr>
+
+                        @foreach ($dataPengeluaran as $pengeluaran)
+                        <tr class="service">
+                            <td class="tableitem"><p class="itemtext">{{ Carbon\Carbon::parse($pengeluaran->tanggal)->translatedFormat("d/m/Y") }}</p></td>
+                            <td class="tableitem"><p class="itemtext">{{ $pengeluaran->nama }}</p></td>
+                            <td class="tableitem"><p class="itemtext"></p></td>
+                            <td class="tableitem"><p class="itemtext">Rp {{ number_format($pengeluaran->jumlah,0,',','.') }}</p></td>
+                        </tr>
+                        @endforeach
+
+                        <tr class="tabletitle">
+                            <td class="Rate"><p style="font-size: 9px">Total</p></td>
+                            <td class="Rate"><p style="font-size: 9px"></p></td>
+                            <td></td>
+                            <td class="payment"><p style="font-size: 9px">Rp {{ number_format($totalPengeluaran,0,',','.') }}</p></td>
+                        </tr>
+
+                    </table>
+                </div><!--End Table-->
+
                 {{-- Total --}}
                 <?php $hasilPenjualan = $totalPenjualan + $totalPenjualanSortir ?>
                 <?php $hasilPanen = $totalPanen + $totalPanenSortir ?>
+                <?php $pengeluaranAll = $hasilPanen + $totalPengeluaran ?>
                 <div id="table">
                     <table>
                         <tr class="tabletitle">
@@ -269,20 +300,31 @@
                             <td class="payment">Rp {{ number_format($hasilPanen,0,',','.') }}</td>
                         </tr>
                         <tr class="tabletitle">
-                            @if ($hasilPenjualan > $hasilPanen)
+                            <td class="rate">Total Pengeluaran:</td>
+                            <td></td>
+                            <td></td>
+                            <td class="payment">Rp {{ number_format($totalPengeluaran,0,',','.') }}</td>
+                        </tr>
+                        <tr class="tabletitle">
+                            @if ($hasilPenjualan > $pengeluaranAll)
                             <td class="rate">Laba: </td>
                             <td></td>
                             <td></td>
-                            <td class="payment">Rp {{ number_format($hasilPenjualan - $hasilPanen,0,',','.') }}</td>
+                            <td class="payment">Rp {{ number_format($hasilPenjualan - $pengeluaranAll,0,',','.') }}</td>
                             @else
                             <td class="rate">Rugi: </td>
                             <td></td>
                             <td></td>
-                            <td class="payment">Rp {{ number_format($hasilPanen - $hasilPenjualan,0,',','.') }}</td>
+                            <td class="payment">Rp {{ number_format($pengeluaranAll - $hasilPenjualan,0,',','.') }}</td>
                             @endif
                             
                         </tr>
                     </table>
+                    {{-- <hr> --}}
+                    <div id="table">
+                        <table>
+                        </table>
+                    </div>
                 </div>
 
                 {{-- <div id="legalcopy">

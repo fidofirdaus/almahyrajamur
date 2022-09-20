@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Panen;
+use App\Pengeluaran;
 use App\Penjualan;
 use App\Penjualansortir;
 use App\Sortirpanen;
@@ -68,8 +69,12 @@ class RekapController extends Controller
         $beratPanen = Panen::where('status', 'Sudah Dibayar')->whereBetween('tanggal', [$request->tglAwal, $request->tglAkhir])->sum('berat');
         $beratPanenSortir = Sortirpanen::where('status', 'Sudah Dibayar')->whereBetween('tanggal', [$request->tglAwal, $request->tglAkhir])->sum('berat');
 
+        //Pengeluaran
+        $dataPengeluaran = Pengeluaran::whereBetween('tanggal', [$request->tglAwal, $request->tglAkhir])->get();
+        $totalPengeluaran = Pengeluaran::whereBetween('tanggal', [$request->tglAwal, $request->tglAkhir])->sum('jumlah');
+
         //Data
-        $data = ['dataPenjualan' => $dataPenjualan, 'dataPenjualanSortir' => $dataPenjualanSortir, 'dataPanen' => $dataPanen, 'dataPanenSortir' => $dataPanenSortir, 'totalPenjualan' => $totalPenjualan, 'totalPenjualanSortir' => $totalPenjualanSortir, 'totalPanen' => $totalPanen, 'totalPanenSortir' => $totalPanenSortir, 'beratPenjualan' => $beratPenjualan, 'beratPenjualanSortir' => $beratPenjualanSortir, 'beratPanen' => $beratPanen, 'beratPanenSortir' => $beratPanenSortir, 'tglAwal' => $request->tglAwal, 'tglAkhir' => $request->tglAkhir];
+        $data = ['dataPenjualan' => $dataPenjualan, 'dataPenjualanSortir' => $dataPenjualanSortir, 'dataPanen' => $dataPanen, 'dataPanenSortir' => $dataPanenSortir, 'totalPenjualan' => $totalPenjualan, 'totalPenjualanSortir' => $totalPenjualanSortir, 'totalPanen' => $totalPanen, 'totalPanenSortir' => $totalPanenSortir, 'beratPenjualan' => $beratPenjualan, 'beratPenjualanSortir' => $beratPenjualanSortir, 'beratPanen' => $beratPanen, 'beratPanenSortir' => $beratPanenSortir, 'dataPengeluaran' => $dataPengeluaran, 'totalPengeluaran' => $totalPengeluaran, 'tglAwal' => $request->tglAwal, 'tglAkhir' => $request->tglAkhir];
 
         return view('rekap.rekapKeuntungan', $data);
     }
