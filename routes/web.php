@@ -47,7 +47,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/pengeluaranHarian', 'PengeluaranController@indexHarian')->name('pengeluaran.indexHarian');
     Route::get('/pengeluaranKeseluruhan', 'PengeluaranController@indexKeseluruhan')->name('pengeluaran.indexKeseluruhan');
     Route::get('/pengeluaran/create', 'PengeluaranController@create')->name('pengeluaran.create');
+    Route::get('/pengeluaran/createTerlewat', 'PengeluaranController@create');
     Route::post('/pengeluaran/create', 'PengeluaranController@store')->name('pengeluaran.store');
+    Route::post('/pengeluaran/createTerlewat', 'PengeluaranController@storeTerlewat')->name('pengeluaran.storeTerlewat');
     Route::get('/pengeluaran/createNew', 'PengeluaranController@createNew')->name('pengeluaran.createNew');
     Route::get('/pengeluaran/edit/{id}', 'PengeluaranController@edit')->name('pengeluaran.edit');
     Route::patch('/pengeluaran/edit/{id}', 'PengeluaranController@update')->name('pengeluaran.update');

@@ -40,7 +40,7 @@ class PengeluaranController extends Controller
                 ['nama', '=', $nama[$i]]
             ])->get();
             if (count($pengeluaran_exist) > 0) {
-                return redirect()->route('pengeluaran.indexHarian')->with('warning', 'Data pengeluaran sudah ada, silakan tambah data penjualan yang lain.');
+                return redirect()->route('pengeluaran.indexHarian')->with('warning', 'Data pengeluaran sudah ada, silakan tambah data pengeluaran yang lain.');
             } else {
                 $data = [
                     'nama' => $nama[$i],
@@ -87,5 +87,32 @@ class PengeluaranController extends Controller
             'jumlah' => $request->jumlah,
         ]);
         return redirect()->route('pengeluaran.indexHarian')->with('success', 'Data pengeluaran berhasil diedit');
+    }
+
+    public function storeTerlewat(Request $request)
+    {
+        $nama = $request->nama;
+        $jumlah = $request->jumlah;
+        $tanggal = $request->tanggal;
+
+        for ($i=0; $i < count($nama); $i++) { 
+            $pengeluaran_exist = Pengeluaran::where([
+                ['tanggal', '=', $tanggal],
+                ['nama', '=', $nama[$i]]
+            ])->get();
+            if (count($pengeluaran_exist) > 0) {
+                return redirect()->route('pengeluaran.indexKeseluruhan')->with('warning', 'Data pengeluaran sudah ada, silakan tambah data pengeluaran yang lain.');
+            } else {
+                $data = [
+                    'nama' => $nama[$i],
+                    'tanggal' => $tanggal,
+                    'jumlah' => $jumlah[$i],
+                    'created_at' => Carbon::now()->setTimezone('Asia/Jakarta'),
+                    'updated_at' => Carbon::now()->setTimezone('Asia/Jakarta'),
+                ];
+                Pengeluaran::insert($data);
+            }
+        }
+        return redirect()->route('pengeluaran.indexKeseluruhan')->with('success', 'Data pengeluaran berhasil ditambah');
     }
 }

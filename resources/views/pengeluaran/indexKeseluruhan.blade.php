@@ -42,7 +42,7 @@
                 </div>
                 @endif
                 <h4 class="card-title">Data Pengeluaran Keseluruhan</h4>
-                {{-- <a href="{{ URL('/pengeluaran/create') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Tambah Data Pengeluaran</a> --}}
+                <a href="{{ URL('/pengeluaran/createTerlewat') }}" class="btn btn-primary"><i class="fa fa-plus"></i> Tambah Data Pengeluaran Terlewat</a>
                 <div class="row">
                     <div class="table-responsive m-t-20">
                         <table id="myTable" class="table table-bordered table-striped">
